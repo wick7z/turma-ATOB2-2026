@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Defesa Galáctica - Esboço com Tiro</title>
+  <style>
+    body { margin: 0; background: black; }
+    canvas { display: block; margin: 0 auto; background: #111; }
+  </style>
+</head>
+<body>
+<canvas id="gameCanvas" width="600" height="400"></canvas>
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+// Nave do jogador
+let nave = { x: 280, y: 350, width: 40, height: 40, speed: 5 };
+
+// Tiros
+let tiros = [];
+
+// Controles
+let leftPressed = false;
+let rightPressed = false;
+let spacePressed = false;
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") leftPressed = true;
+  if (e.key === "ArrowRight") rightPressed = true;
+  if (e.key === " ") spacePressed = true;
+});
+document.addEventListener("keyup", (e) => {
+  if (e.key === "ArrowLeft") leftPressed = false;
+  if (e.key === "ArrowRight") rightPressed = false;
+  if (e.key === " ") spacePressed = false;
+});
+
+// Desenhar nave
+function drawNave() {
+  ctx.fillStyle = "lime";
+  ctx.fillRect(nave.x, nave.y, nave.width, nave.height);
+}
+
+// Desenhar tiros
+function drawTiros() {
+  ctx.fillStyle = "yellow";
+  tiros.forEach(t => ctx.fillRect(t.x, t.y, t.width, t.height));
+}
+
+// Atualizar posição
+function update() {
+  // Movimentação da nave
+  if (leftPressed && nave.x > 0) nave.x -= nave.speed;
+  if (rightPressed && nave.x + nave.width < canvas.width) nave.x += nave.speed;
+
+  // Criar tiro
+  if (spacePressed) {
+    if (tiros.length === 0 || tiros[tiros.length-1].y < nave.y - 20) {
+      tiros.push({ x: nave.x + nave.width/2 - 2, y: nave.y, width: 4, height: 10, speed: 7 });
+    }
+  }
+
+  // Atualizar tiros
+  tiros.forEach((t, index) => {
+    t.y -= t.speed;
+    // Remover tiros que saíram da tela
+    if (t.y + t.height < 0) tiros.splice(index, 1);
+  });
+}
+
+// Loop do jogo
+function gameLoop() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  update();
+  drawNave();
+  drawTiros();
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+</script>
+</body>
+</html>
