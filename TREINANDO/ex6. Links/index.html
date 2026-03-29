@@ -1,0 +1,27 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalhando com links</title>
+</head>
+<body>
+    <h1>Usando links externos</h1>
+       <p>Para criar um link externo, ou seja, um link que leva o usuário para outro site, usamos a tag &lt;a&gt; (de âncora) e o atributo href para especificar o endereço do site de destino.</p>
+       
+       <p>Exemplo de link externo: <a href="https://github.com/wick7z/turma-ATOB2-2026" target="_blank">Repositório do curso Git Hub</a></p>
+       <p>O atributo target="_blank" é usado para abrir o link em uma nova aba do navegador, permitindo que o usuário mantenha a página original aberta.</p>
+       <p>se nao coloca o target="_blank", o link será aberto na mesma aba do navegador.</p>
+       <p>exemplo de link interno: <a href="https://github.com/wick7z/turma-ATOB2-2026">Meu Git Hub</a></p>
+       <p>rel external indica ao navegador que o link é externo e pode ser tratado de forma diferente.</p>
+
+       <h2>Links Internos</h2>
+       <p>Esta é a primeira pagina do site. Se voce quiser, pode acessar tambem a minha<a href="pag002.html" rel="next"> Pagina 2</a>.</p>
+       <p> Tambem, voce pode acessar a pagina de noticias<a href="noticias/pag003.html" rel="next">Terceira Pagina</a>.</p>
+       
+       <h1>Links para downloads</h1>
+       <ul>
+          <li><a href="livro/Guia de empresas juniores.pdf" download="Guia de empresas juniores.pdf" type="application/pdf">Download do arquivo em PDF</a></li>
+          <li><a href="livro/Guia de empresas juniores.7z" download="Guia de empresas juniores.7z" type="application/zip">Download do livro compactado em ZIP</a></li>
+       </ul>
+</body>
+</html>
